@@ -1,0 +1,14 @@
+{
+  "en": {
+    "translation": {
+      "components.BusinessCard.name": "Johnny Hu",
+      "components.BusinessCard.title": "Software Engineer",
+      "components.BusinessCard.phoneNumber": "+14157978699",
+      "components.BusinessCard.emailAddress": "johnny@dreamistlabs.com",
+      "components.BusinessCard.companyName": "Dreamist Labs",
+      "components.Footer.copyright": "© 2020 Dreamist Labs",
+      "components.Footer.businessCard.linkTitle": "Show digital business card",
+      "components.Page.Coronavirus.FormGroup.CountrySelect.Label": "Select Countries"
+    }
+  }
+}
