@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import { getAnimation } from './animations';
-import { STORAGE_KEY } from './const';
+import { ROUTES, STORAGE_KEY } from './const';
 import {
   Breadcrumbs,
   Footer,
@@ -31,10 +31,10 @@ const App = () => {
   const [appState, dispatch] = useContext(AppContext);
   const classes = useStyles();
   const location = useLocation();
-  const isHome = location.pathname === '/';
+  const isHome = location.pathname === ROUTES.HOME;
 
   useEffect(() => {
-    localStorage.removeItem(STORAGE_KEY);
+    // localStorage.removeItem(STORAGE_KEY);
     const payload = JSON.parse(localStorage.getItem(STORAGE_KEY));
     // Rule: Skipping Splash Animation
     // if local storage exist in user's browser
@@ -49,7 +49,7 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    fetchInitialCovidData(appState, dispatch);
+    // fetchInitialCovidData(appState, dispatch);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -62,7 +62,7 @@ const App = () => {
     }
   }, [appState.splashLogo.finished, appState.viewedIntro, dispatch]);
 
-  console.log('APP STATE', appState);
+  // console.log('APP STATE', appState);
 
   return (
     <>

@@ -71,7 +71,7 @@ export default (props) => {
       .then((post) => dispatchState({ key: 'post', post }));
   }, [posts, state.index]);
 
-  console.log(state);
+  // console.log(state);
 
   return (
     <PageLayout pageName="jottingPad" className={classes.jottingPadLayout}>

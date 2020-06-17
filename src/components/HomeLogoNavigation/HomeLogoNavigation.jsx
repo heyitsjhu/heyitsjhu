@@ -70,6 +70,14 @@ const useStyles = makeStyles(({ palette, spacing, transitions, zIndex }) => ({
       left: spacing(2),
     },
   },
+  comingSoon: {
+    padding: spacing(2),
+    color: palette.grey[300],
+    fontSize: 18,
+    fontWeight: 600,
+    textTransform: 'uppercase',
+    opacity: 0,
+  },
 }));
 
 export default (props) => {
@@ -127,19 +135,22 @@ export default (props) => {
                 className={classnames(
                   Utils.getElClass('component', 'homeLogo-path'),
                   classes.svgPath,
-                  path.css && classes[path.css],
-                  isInteractive && 'interactive'
+                  path.css && classes[path.css]
+                  // isInteractive && 'interactive'
                 )}
                 d={path.d}
                 id={path.navId}
                 key={path.d}
-                onClick={handleClick(path.navId)}
-                onMouseOver={isInteractive ? handleMouseOver : undefined}
-                onMouseLeave={isInteractive ? handleMouseLeave : undefined}
+                // onClick={handleClick(path.navId)}
+                // onMouseOver={isInteractive ? handleMouseOver : undefined}
+                // onMouseLeave={isInteractive ? handleMouseLeave : undefined}
               />
             ))}
           </g>
         </svg>
+        <Typography className={classnames([classes.comingSoon, 'coming-soon'])} variant="subtitle2">
+          coming soon
+        </Typography>
       </Box>
       <Popper anchorEl={anchorEl} id={id} open={open} placement={popperPlacement} transition>
         {({ TransitionProps }) => (

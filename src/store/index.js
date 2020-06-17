@@ -37,7 +37,7 @@ const initialState = {
     },
   },
   localStorage: { introViewed: false },
-  splashLogo: { started: false, playing: false, finished: true },
+  splashLogo: { started: false, playing: false, finished: false },
 };
 
 const appReducer = (state, action) => {

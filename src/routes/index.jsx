@@ -13,20 +13,20 @@ import {
 export default () => (
   <Switch>
     <Route exact path="/" />
-    <Route exact path={ROUTES.POWEREDBYSCROLL}>
-      {/* <PoweredByScroll /> */}
+    {/* <Route exact path={ROUTES.POWEREDBYSCROLL}>
+      <PoweredByScroll />
     </Route>
     <Route exact path={ROUTES.CORONAVIRUS}>
       <CoronavirusPage />
     </Route>
     <Route exact path={ROUTES.DREAMISTLABS}>
-      {/* <DreamistLabsPage /> */}
+      <DreamistLabsPage />
     </Route>
     <Route exact path={ROUTES.CANDLEMONKEYS}>
-      {/* <CandleMonkeysPage /> */}
+      <CandleMonkeysPage />
     </Route>
     <Route exact path={ROUTES.JHUM}>
-      {/* <JHUMPage /> */}
+      <JHUMPage />
     </Route>
 
     <Route exact path={ROUTES.PROFILE}>
@@ -36,15 +36,15 @@ export default () => (
       <JottingPadPage />
     </Route>
     <Route exact path={ROUTES.JOTTINGPADPOST}>
-      {/* <JottingPadPostPage /> */}
+      <JottingPadPostPage />
     </Route>
     <Route exact path={ROUTES.PHOTOGRAPHY}>
-      {/* <AboutPage /> */}
+      <AboutPage />
     </Route>
 
     <Route exact path={ROUTES.PURPOSE}>
-      {/* <AboutPage /> */}
-    </Route>
+      <AboutPage />
+    </Route> */}
     <Route exact path={ROUTES.BUSINESSCARD}>
       <BusinessCardPage />
     </Route>

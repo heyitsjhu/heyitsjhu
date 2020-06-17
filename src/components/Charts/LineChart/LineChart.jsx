@@ -132,7 +132,7 @@ export default (props) => {
     chart.current.paddingRight = 16;
     chart.current.paddingBottom = 32;
     chart.current.data = chartData[dataType.value];
-    chart.current.events.on('ready', () => setIsLoading(false));
+    // chart.current.events.on('ready', () => setIsLoading(false));
     chart.current.series.clear();
 
     // console.log('chartData', chartData[dataType.value]);
@@ -150,7 +150,7 @@ export default (props) => {
     return () => chart.current && chart.current.dispose();
   }, [props.id, chartData, dataType]);
 
-  console.log('CHART', props, chartData);
+  // console.log('CHART', props, chartData);
 
   return (
     <>
