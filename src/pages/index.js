@@ -1,7 +1,9 @@
-import AboutPage from './About/About';
+import BusinessCardPage from './BusinessCard/BusinessCard';
 import CoronavirusPage from './Coronavirus/Coronavirus';
-import HomePage from './Home/Home';
+import JottingPadPage from './JottingPad/JottingPad';
+import ProfilePage from './Profile/Profile';
+
 import PageLayout from './PageLayout/PageLayout';
 import PageNotFound from './PageNotFound/PageNotFound';
 
-export { AboutPage, CoronavirusPage, HomePage, PageLayout, PageNotFound };
+export { BusinessCardPage, CoronavirusPage, JottingPadPage, PageLayout, PageNotFound, ProfilePage };

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
@@ -8,7 +8,6 @@ import Typography from '@material-ui/core/Typography';
 import classnames from 'classnames';
 
 import * as Utils from '../../utils';
-import getAnimation from './anime';
 
 const useStyles = makeStyles(({ palette, spacing, transitions, typography, zIndex }) => ({
   breadcrumbs: {
@@ -107,18 +106,11 @@ export default (props) => {
   const location = useLocation();
   const urlSegments = location.pathname.split('/').filter((u) => u);
 
-  useEffect(() => {
-    if (props.isReady) {
-      const animation = getAnimation();
-      animation.play();
-    }
-  }, [props.isReady]);
-
   return (
     <MUIBreadcrumbs
-      aria-label="breadcrumbs"
-      className={classnames(Utils.getElClass('site', 'breadcrumbs'), classes.breadcrumbs)}
       id={Utils.getElId('site', 'breadcrumbs')}
+      aria-label="breadcrumbs"
+      className={classnames('dl-breadcrumbs', classes.breadcrumbs)}
       separator={null}
     >
       {urlSegments.map((urlSegment, i) => {

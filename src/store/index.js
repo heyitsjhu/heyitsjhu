@@ -1,95 +1,94 @@
 import React, { createContext, useReducer } from 'react';
-import constants from '../app/constants';
-
-export const SET_SPLASH_LOGO_START = 'SET_SPLASH_LOGO_START';
-export const SET_SPLASH_LOGO_FINISH = 'SET_SPLASH_LOGO_FINISH';
-export const SET_CORONAVIRUS_DATA = 'SET_CORONAVIRUS_DATA';
-export const SET_CORONAVIRUS_SETTING = 'SET_CORONAVIRUS_SETTING';
-export const LOAD_LOCAL_STORAGE = 'LOAD_LOCAL_STORAGE';
-export const UPDATE_LOCAL_STORAGE = 'UPDATE_LOCAL_STORAGE';
+import { STORAGE_KEY } from '../const';
+import {
+  SET_LOADING,
+  UPDATE_STATE,
+  UPDATE_CORONAVIRUS_DATA,
+  UPDATE_CORONAVIRUS_SETTING,
+  UPDATE_LOCAL_STORAGE,
+  UPDATE_SPLASH_LOGO,
+} from './types';
+import { deepClone } from '../utils';
 
 const initialState = {
   coronavirus: {
-    data: {
-      countries: [],
-      history: [],
-      statistics: [],
+    countries: [],
+    history: {
+      casesNew: [],
+      cases1MPop: [],
+      casesActive: [],
+      casesCritical: [],
+      casesRecovered: [],
+      casesTotal: [],
+      deathsNew: [],
+      deaths1MPop: [],
+      deathsTotal: [],
+      tests1MPop: [],
+      testsTotal: [],
+      population: [],
+      _retrievedCountries: [],
     },
-    loaded: false,
+    mapCountries: [],
+    statistics: [],
+    lastFetched: null,
+    loading: false,
     settings: {
-      showCountries: {},
+      selectedCountries: ['usa'],
     },
   },
-  localStorage: {
-    allowLocalStorage: true,
-    viewedIntro: false,
-  },
-  splashLogo: {
-    started: false,
-    playing: false,
-    finished: true,
-  },
+  localStorage: { introViewed: false },
+  splashLogo: { started: false, playing: false, finished: true },
 };
 
 const appReducer = (state, action) => {
-  const newState = Object.assign({}, state);
+  const newState = deepClone(state);
 
   switch (action.type) {
-    case SET_CORONAVIRUS_DATA:
-      newState.coronavirus = {
-        ...newState.coronavirus,
-        data: {
-          countries: action.payload[0],
-          history: action.payload[1],
-          statistics: action.payload[2],
-        },
-        loaded: true,
-      };
-      // set default country show states
-      action.payload[0].forEach((country) => {
-        newState.coronavirus.settings.showCountries[country] = true;
-      });
-      return newState;
-
-    case SET_CORONAVIRUS_SETTING:
-      newState.coronavirus.settings.showCountries[action.country] = action.checked;
-      return newState;
-
-    case SET_SPLASH_LOGO_START:
-      newState.splashLogo = {
-        ...newState.splashLogo,
-        started: true,
-        playing: true,
-      };
-      return newState;
-
-    case SET_SPLASH_LOGO_FINISH:
-      newState.splashLogo = {
-        started: false,
-        playing: false,
-        finished: true,
-      };
-      return newState;
-
-    case LOAD_LOCAL_STORAGE:
-      newState.localStorage = action.payload;
-      return newState;
-
-    case UPDATE_LOCAL_STORAGE:
-      newState.localStorage = {
-        ...newState.localStorage,
-        ...action.payload,
-      };
-
-      if (newState.localStorage.allowLocalStorage) {
-        localStorage.setItem(constants.storageKey, JSON.stringify(newState.localStorage));
+    case SET_LOADING:
+      newState[action.key].loading = action.payload;
+      break;
+    case UPDATE_STATE:
+      newState[action.key] = action.payload;
+      break;
+    case UPDATE_CORONAVIRUS_DATA:
+      if (action.key) {
+        newState.coronavirus[action.key] = action.payload;
+      } else {
+        newState.coronavirus = { ...newState.coronavirus, ...action.payload };
       }
-
-      return newState;
-
+      break;
+    case UPDATE_CORONAVIRUS_SETTING:
+      newState.coronavirus.settings[action.key] = action.payload;
+      break;
+    case UPDATE_LOCAL_STORAGE:
+      if (action.key) {
+        newState.localStorage[action.key] = action.payload;
+      } else {
+        newState.localStorage = action.payload;
+      }
+      // update client's local storage object
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(newState.localStorage));
+      break;
+    case UPDATE_SPLASH_LOGO:
+      if (action.payload === 'start') {
+        newState.splashLogo = {
+          ...newState.splashLogo,
+          started: true,
+          playing: true,
+        };
+      } else if (action.payload === 'finish') {
+        newState.splashLogo = {
+          started: false,
+          playing: false,
+          finished: true,
+        };
+      }
+      break;
     default:
-      throw new Error();
+      throw new Error('Did not find match for reducer action');
   }
+
+  return newState;
 };
 
 const AppStore = ({ children }) => {

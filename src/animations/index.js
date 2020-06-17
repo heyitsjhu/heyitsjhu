@@ -1,9 +1,7 @@
 import anime from 'animejs/lib/anime.es.js';
-import * as Utils from '../../utils';
 
-const HEADER = `.${Utils.getElClass('component', 'header')}`;
-
-export default (onStart = undefined, onEnd = undefined) => {
+// fades in the header and footer sections
+export const getAnimation = (onStart = undefined, onEnd = undefined) => {
   return anime
     .timeline({
       autoplay: false,
@@ -14,7 +12,7 @@ export default (onStart = undefined, onEnd = undefined) => {
       complete: onEnd,
     })
     .add({
-      targets: HEADER,
+      targets: ['header', 'footer', '.dl-breadcrumbs'],
       opacity: 1,
     });
 };

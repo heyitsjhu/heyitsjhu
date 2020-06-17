@@ -1,0 +1,11 @@
+[
+  { "label": "New Cases", "value": "casesNew" },
+  { "label": "Active Cases", "value": "casesActive" },
+  { "label": "Critical Cases", "value": "casesCritical" },
+  { "label": "Recovered Cases", "value": "casesRecovered" },
+  { "label": "Total Cases", "value": "casesTotal" },
+  { "label": "New Deaths", "value": "deathsNew" },
+  { "label": "Total Deaths", "value": "deathsTotal" },
+  { "label": "Total Tests", "value": "testsTotal" },
+  { "label": "Population", "value": "population" }
+]

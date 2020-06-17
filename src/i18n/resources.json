@@ -6,9 +6,23 @@
       "components.BusinessCard.phoneNumber": "+14157978699",
       "components.BusinessCard.emailAddress": "johnny@dreamistlabs.com",
       "components.BusinessCard.companyName": "Dreamist Labs",
+      "components.Charts.MapChart.MapControls.controlPanel": "Control Panel",
       "components.Footer.copyright": "© 2020 Dreamist Labs",
       "components.Footer.businessCard.linkTitle": "Show digital business card",
-      "components.Page.Coronavirus.FormGroup.CountrySelect.Label": "Select Countries"
+      "components.HomeLogoNavigation.navMapping.navId1": "Powered by Scroll",
+      "components.HomeLogoNavigation.navMapping.navId2": "Coronavirus",
+      "components.HomeLogoNavigation.navMapping.navId3": "Dreamist Labs",
+      "components.HomeLogoNavigation.navMapping.navId4": "Candle Monkeys",
+      "components.HomeLogoNavigation.navMapping.navId5": "JHU-M",
+      "components.HomeLogoNavigation.navMapping.navId6": "Profile",
+      "components.HomeLogoNavigation.navMapping.navId7": "Jotting Pad",
+      "components.HomeLogoNavigation.navMapping.navId8": "Photography",
+      "pages.Coronavirus.FormGroup.CountrySelect.Label": "Select Countries",
+      "pages.Coronavirus.Toggle.checkedLabel": "Map",
+      "pages.Coronavirus.Toggle.uncheckedLabel": "Chart",
+      "pages.pageNotFound.thisIsEmbarrassing": "Well... this is slightly embarrassing.",
+      "pages.pageNotFound.theresNothingHere": "There's nothing here.",
+      "pages.pageNotFound.backHomeButton": "Back to Home"
     }
   }
 }

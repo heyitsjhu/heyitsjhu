@@ -1,38 +1,35 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
+import Box from '@material-ui/core/Box';
 import Link from '@material-ui/core/Link';
-import Slide from '@material-ui/core/Slide';
 import Typography from '@material-ui/core/Typography';
 import CallIcon from '@material-ui/icons/Call';
 import EmailIcon from '@material-ui/icons/Email';
 import DomainIcon from '@material-ui/icons/Domain';
 import classnames from 'classnames';
 
+import SiteLogo from '../../components/SiteLogo/SiteLogo';
 import { useCopy } from '../../i18n';
-import SiteLogo from '../SiteLogo/SiteLogo';
 import * as Utils from '../../utils';
 
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
+import PageLayout from '../PageLayout/PageLayout';
 
 const useStyles = makeStyles(({ palette, spacing }) => ({
-  businessCard: {
-    position: 'relative',
+  businessCardLayout: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
+    margin: '10vh auto',
     padding: spacing(3),
+    minWidth: 384,
     maxWidth: '50vh',
     width: '100%',
+    minHeight: 576,
     maxHeight: '75vh',
     height: '100%',
     borderRadius: 0,
     borderTop: `.3125rem solid ${palette.primary.main}`,
-    backgroundColor: palette.grey[900],
+    backgroundColor: '#030303',
     boxShadow: '0.125rem 0.375rem 0.5rem 0 rgba(0,0,0,.6)',
   },
   contentContainer: {
@@ -46,11 +43,20 @@ const useStyles = makeStyles(({ palette, spacing }) => ({
   contentText: {
     display: 'flex',
     alignItems: 'center',
-    color: palette.grey[500],
+    color: palette.grey[300],
     letterSpacing: '.05rem',
     lineHeight: 1.65,
   },
-  logo: {
+  name: {
+    margin: 0,
+    color: palette.grey[300],
+    fontSize: 32,
+    fontWeight: 600,
+    textTransform: 'uppercase',
+    letterSpacing: '0.3rem',
+    lineHeight: 1.1,
+  },
+  siteLogo: {
     marginTop: spacing(1),
     marginBottom: spacing(2),
     '& path': {
@@ -58,14 +64,6 @@ const useStyles = makeStyles(({ palette, spacing }) => ({
         fill: palette.primary.main,
       },
     },
-  },
-  name: {
-    margin: 0,
-    fontSize: 32,
-    fontWeight: 600,
-    textTransform: 'uppercase',
-    letterSpacing: '0.3rem',
-    lineHeight: 1.1,
   },
   titleContainer: {
     marginTop: spacing(1),
@@ -78,24 +76,14 @@ const useStyles = makeStyles(({ palette, spacing }) => ({
   },
 }));
 
-export default ({ className, open, onCloseHandler, ...otherProps }) => {
-  const { t } = useCopy();
+export default (props) => {
   const classes = useStyles();
-  const paperProps = { classes: { root: classes.businessCard } };
+  const { t } = useCopy();
 
   return (
-    <Dialog
-      aria-labelledby={Utils.getElId('business-card-title')}
-      className={Utils.getElClass('component', 'businessCard')}
-      id={Utils.getElId('component', 'business-card')}
-      open={open}
-      PaperProps={paperProps}
-      TransitionComponent={Transition}
-      onClose={onCloseHandler}
-      {...otherProps}
-    >
-      <SiteLogo className={classes.logo} size={120} />
-      <DialogTitle
+    <PageLayout pageName="business-card" className={classes.businessCardLayout} disableFullscreen>
+      <SiteLogo className={classes.siteLogo} size={100} />
+      <Box
         id={Utils.getElId('component', 'business-card-title')}
         className={classnames(
           Utils.getElClass('element', 'businessCard-title'),
@@ -109,8 +97,8 @@ export default ({ className, open, onCloseHandler, ...otherProps }) => {
         <Typography className={classes.title} component="span" variant="body1">
           {t('components.BusinessCard.title')}
         </Typography>
-      </DialogTitle>
-      <DialogContent className={classes.contentContainer}>
+      </Box>
+      <Box className={classes.contentContainer}>
         <Link href={`tel:${t('components.BusinessCard.phoneNumber')}`}>
           <Typography className={classes.contentText} component="span" variant="body1">
             <CallIcon className={classes.contentIcon} />
@@ -127,7 +115,7 @@ export default ({ className, open, onCloseHandler, ...otherProps }) => {
           <DomainIcon className={classes.contentIcon} />
           {t('components.BusinessCard.companyName')}
         </Typography>
-      </DialogContent>
-    </Dialog>
+      </Box>
+    </PageLayout>
   );
 };

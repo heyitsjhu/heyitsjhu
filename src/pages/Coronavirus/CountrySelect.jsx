@@ -46,7 +46,7 @@ export default ({ countries, countryStates, onChange }) => {
       >
         <FormLabel component="legend">
           <Typography color="textPrimary">
-            {t('components.Page.Coronavirus.FormGroup.CountrySelect.Label')}
+            {t('pages.Coronavirus.FormGroup.CountrySelect.Label')}
           </Typography>
         </FormLabel>
         {countries.map((country) => {

@@ -3,7 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import classnames from 'classnames';
 
-import { AppContext, SET_SPLASH_LOGO_START, SET_SPLASH_LOGO_FINISH } from '../../store';
+import { AppContext } from '../../store';
+import { updateSplashLogo } from '../../store/actions';
 import getAnimation from './anime';
 import paths from './paths';
 
@@ -39,11 +40,11 @@ const useStyles = makeStyles((theme) => ({
   },
   curtainLeft: {
     left: 0,
-    borderRight: `3px solid ${theme.palette.grey[500]}`,
+    borderRight: `3px solid ${theme.palette.grey[600]}`,
   },
   curtainRight: {
     right: 0,
-    borderLeft: `3px solid ${theme.palette.grey[500]}`,
+    borderLeft: `3px solid ${theme.palette.grey[600]}`,
   },
   logoSvg: {
     position: 'fixed',
@@ -72,16 +73,19 @@ export default (props) => {
   const viewBox = props.viewBox || '0 0 528 566';
 
   const onStartAnimation = (anim) => {
-    dispatch({ type: SET_SPLASH_LOGO_START });
+    dispatch(updateSplashLogo('start'));
   };
 
   const onEndAnimation = (anim) => {
-    dispatch({ type: SET_SPLASH_LOGO_FINISH });
+    dispatch(updateSplashLogo('finish'));
   };
 
   useEffect(() => {
-    const animation = getAnimation(onStartAnimation, onEndAnimation);
-    animation.play();
+    if (!appState.splashLogo.finished) {
+      const animation = getAnimation(onStartAnimation, onEndAnimation);
+      animation.play();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

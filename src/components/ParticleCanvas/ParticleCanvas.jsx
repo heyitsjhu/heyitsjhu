@@ -24,6 +24,8 @@ export default (props) => {
   const classes = useStyles();
   const canvasRef = useRef(null);
   const [canvas, setCanvas] = useState(null);
+  const [canvasLeft, setCanvasLeft] = useState(0);
+  const [canvasTop, setCanvasTop] = useState(0);
   const [ctx, setCtx] = useState(null);
   const [canvasWidth, setCanvasWidth] = useState(600);
   const [canvasHeight, setCanvasHeight] = useState(400);
@@ -114,7 +116,7 @@ export default (props) => {
 
   const renderParticles = () => {
     const { r, g, b } = particleColor;
-    Array.prototype.forEach.call(particles, function (p) {
+    Array.prototype.forEach.call(particles, function (p, i) {
       if (!p.hasOwnProperty('type')) {
         ctx.fillStyle = `rgba(${r},${g},${b},${p.alpha})`;
         ctx.beginPath();
@@ -210,7 +212,7 @@ export default (props) => {
     if (slowMultiplier !== props.slowMultiplier) {
       setSlowMultiplier(props.slowMultiplier);
     }
-  }, [props]);
+  }, [props, slowMultiplier]);
 
   useEffect(() => {
     setCanvas(canvasRef.current);
@@ -218,14 +220,18 @@ export default (props) => {
 
   useEffect(() => {
     if (!ctx && canvas) {
+      setCanvasLeft(canvas.offsetLeft + canvas.clientLeft);
+      setCanvasTop(canvas.offsetTop + canvas.clientTop);
       setCtx(canvas.getContext('2d'));
       initCanvas();
     }
-  }, [ctx, canvas, initCanvas]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ctx, canvas]);
 
   useEffect(() => {
     initParticles(particleCount);
     window.requestAnimationFrame(renderParticleCanvas);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [canvasWidth, canvasHeight]);
 
   useEffect(() => {

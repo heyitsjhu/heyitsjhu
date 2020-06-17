@@ -6,14 +6,14 @@ import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import classnames from 'classnames';
-import palette from '../../theme/palette';
-
-import * as Utils from '../../utils';
+import { Loading } from '../../../components';
+import palette from '../../../theme/palette';
+import * as Utils from '../../../utils';
 
 am4core.useTheme(am4themes_animated);
 
 const useStyles = makeStyles(({ palette, spacing, transitions }) => ({
-  covidMapContainer: {
+  covidMapChartContainer: {
     marginTop: spacing(1),
     marginBottom: spacing(4),
   },
@@ -21,6 +21,7 @@ const useStyles = makeStyles(({ palette, spacing, transitions }) => ({
 
 export default (props) => {
   const classes = useStyles();
+  const [isLoading, setIsLoading] = useState(false);
   const [chartData, setChartData] = useState([]);
   const chart = useRef({});
 
@@ -30,7 +31,6 @@ export default (props) => {
     let polygonSeries = chart.series.push(new am4maps.MapPolygonSeries());
     polygonSeries.useGeodata = true;
     polygonSeries.nonScalingStroke = true;
-    // polygonSeries.strokeWidth = 0.25;
     polygonSeries.calculateVisualCenter = true;
 
     let polygonTemplate = polygonSeries.mapPolygons.template;
@@ -75,6 +75,7 @@ export default (props) => {
 
   useEffect(() => {
     if (props.data) {
+      setIsLoading(true);
       const chartData = Utils.convertCovidStatisticsData(props.data);
       setChartData(chartData);
     }
@@ -82,20 +83,22 @@ export default (props) => {
 
   useEffect(() => {
     chart.current = am4core.create(props.id, am4maps.MapChart);
+    chart.current.events.on('ready', () => setIsLoading(false));
     chart.current.series.clear();
 
     setMapPolygonAndImageSeries(chart.current, chartData, chart.current.series);
 
-    return () => chart.current.dispose();
-  }, [chartData]);
-
-  console.log('CORONAVIRUS CHART', props.data, chartData);
+    return () => chart.current && chart.current.dispose();
+  }, [props.id, chartData]);
 
   return (
-    <Box
-      id={props.id}
-      className={classnames(Utils.getElClass('chart', 'coronavirus'), classes.covidMapContainer)}
-      style={{ width: '100%', height: '100%' }}
-    />
+    <>
+      <Loading isLoading={isLoading} />
+      <Box
+        id={props.id}
+        className={classnames(classes.covidMapChartContainer)}
+        style={{ width: '100%', height: '100%' }}
+      />
+    </>
   );
 };

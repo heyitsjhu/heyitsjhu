@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
@@ -7,11 +7,10 @@ import Popper from '@material-ui/core/Popper';
 import Typography from '@material-ui/core/Typography';
 import classnames from 'classnames';
 
-import constants from '../../app/constants';
-import { AppContext } from '../../store';
+import { useCopy } from '../../i18n';
 import * as Utils from '../../utils';
-
 import getAnimation from './anime';
+import navMapping from './navMapping';
 import paths from './paths';
 
 const useStyles = makeStyles(({ palette, spacing, transitions, zIndex }) => ({
@@ -38,15 +37,14 @@ const useStyles = makeStyles(({ palette, spacing, transitions, zIndex }) => ({
   },
   svgPath: {
     transition: `fill ${transitions.duration.long}ms ${transitions.easing.easeInOut}`,
-    '&:hover': { cursor: 'pointer' },
   },
   pathSet1: {
     fill: palette.grey[600],
-    '&:hover': { fill: palette.grey[100] },
+    '&.interactive:hover': { fill: palette.grey[100], cursor: 'pointer' },
   },
   pathSet2: {
     fill: palette.primary.dark,
-    '&:hover': { fill: palette.primary.main },
+    '&.interactive:hover': { fill: palette.primary.main, cursor: 'pointer' },
   },
   popper: {
     marginLeft: spacing(3),
@@ -75,22 +73,20 @@ const useStyles = makeStyles(({ palette, spacing, transitions, zIndex }) => ({
 }));
 
 export default (props) => {
-  const [appState, dispatch] = useContext(AppContext);
   const classes = useStyles();
+  const { t } = useCopy();
   const history = useHistory();
-  const routeMapping = constants.homeLogoNav.mapping;
   const viewBox = props.viewBox || '0 0 528 566';
   const [anchorEl, setAnchorEl] = useState(null);
   const [popperPlacement, setPopperPlacement] = useState('left');
   const [popperText, setPopperText] = useState('');
+  const [isInteractive, setIsInteractive] = useState(false);
   const open = Boolean(anchorEl);
   const id = open ? 'transitions-popper' : undefined;
 
   const handleMouseOver = (event) => {
     if (!anchorEl) {
-      const popper = routeMapping[event.currentTarget.id];
-
-      console.log('handleMouseOver', popper);
+      const popper = navMapping[event.currentTarget.id];
 
       setPopperPlacement(popper.placement);
       setPopperText(popper.text);
@@ -102,12 +98,12 @@ export default (props) => {
   };
 
   const handleClick = (navId) => (event) => {
-    history.push(routeMapping[navId].url);
+    history.push(navMapping[navId].url, { fromNav: true });
   };
 
   useEffect(() => {
     if (props.isReady) {
-      const animation = getAnimation();
+      const animation = getAnimation(null, () => setIsInteractive(true));
       animation.play();
     }
   }, [props.isReady]);
@@ -131,14 +127,15 @@ export default (props) => {
                 className={classnames(
                   Utils.getElClass('component', 'homeLogo-path'),
                   classes.svgPath,
-                  path.css && classes[path.css]
+                  path.css && classes[path.css],
+                  isInteractive && 'interactive'
                 )}
                 d={path.d}
                 id={path.navId}
                 key={path.d}
                 onClick={handleClick(path.navId)}
-                onMouseOver={handleMouseOver}
-                onMouseLeave={handleMouseLeave}
+                onMouseOver={isInteractive ? handleMouseOver : undefined}
+                onMouseLeave={isInteractive ? handleMouseLeave : undefined}
               />
             ))}
           </g>
@@ -156,7 +153,7 @@ export default (props) => {
               )}
             >
               <Typography color="textPrimary" variant="overline">
-                {popperText}
+                {t(popperText)}
               </Typography>
             </div>
           </Fade>

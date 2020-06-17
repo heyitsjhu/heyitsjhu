@@ -1,2 +1,3 @@
 export * from './helpers';
-export * from './dataMutators';
+export * from './dataHandlers';
+export * from './deepClone';
