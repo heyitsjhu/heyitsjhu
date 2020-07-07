@@ -16,12 +16,5 @@ export default (onStart = undefined, onEnd = undefined) => {
     .add({
       targets: HOME_LOGO_CONTAINER,
       opacity: 1,
-    })
-    .add(
-      {
-        targets: '.coming-soon',
-        opacity: 1,
-      },
-      '+4000'
-    );
+    });
 };

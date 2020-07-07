@@ -1,12 +1,3 @@
-export const initialState = {
-  index: {
-    prev: null,
-    current: 0,
-    next: 1,
-  },
-  postContent: '',
-};
-
 export const stateReducer = (state, action) => {
   if (action.key === 'post') {
     return { ...state, postContent: action.post };

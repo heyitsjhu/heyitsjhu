@@ -14,13 +14,12 @@
     "animejs": "^3.2.0",
     "axios": "^0.19.2",
     "classnames": "^2.2.6",
-    "gh-pages": "^3.0.0",
     "i18next": "^19.4.4",
-    "js-logger": "^1.6.0",
+    "moment": "^2.27.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-i18next": "^11.4.0",
-    "react-markdown": "^4.3.1",
+    "react-images": "^1.1.7",
     "react-photo-gallery": "^8.0.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
@@ -52,5 +51,14 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {}
+  "jest": {
+    "transformIgnorePatterns": [
+      "<rootDir>/node_modules/(?!animejs|use-reducer-logger|@amcharts)"
+    ]
+  },
+  "devDependencies": {
+    "gh-pages": "^3.0.0",
+    "js-logger": "^1.6.0",
+    "use-reducer-logger": "^1.0.2"
+  }
 }

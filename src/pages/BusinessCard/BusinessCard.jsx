@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Link from '@material-ui/core/Link';
@@ -10,51 +10,53 @@ import classnames from 'classnames';
 
 import SiteLogo from '../../components/SiteLogo/SiteLogo';
 import { useCopy } from '../../i18n';
+import { AppContext } from '../../store';
 import * as Utils from '../../utils';
 
 import PageLayout from '../PageLayout/PageLayout';
 
-const useStyles = makeStyles(({ palette, spacing }) => ({
+const useStyles = makeStyles(({ breakpoints, palette, spacing, zIndex }) => ({
   businessCardLayout: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
-    margin: '10vh auto',
+    margin: '10vh 10vw',
     padding: spacing(3),
-    minWidth: 384,
-    maxWidth: '50vh',
-    width: '100%',
-    minHeight: 576,
-    maxHeight: '75vh',
     height: '100%',
+    width: '100%',
+    maxHeight: '80vh',
+    maxWidth: '80vw',
     borderRadius: 0,
     borderTop: `.3125rem solid ${palette.primary.main}`,
     backgroundColor: palette.grey[1300],
     boxShadow: '0.125rem 0.375rem 0.5rem 0 rgba(0,0,0,.6)',
+    [`${breakpoints.down('sm')} and (orientation: portrait)`]: {
+      maxHeight: 500,
+    },
+    [`${breakpoints.up('md')} and (orientation: portrait)`]: {
+      margin: '20vh auto',
+      maxWidth: '30vh',
+      maxHeight: '45vh',
+    },
+    [`${breakpoints.up('md')} and (orientation: landscape)`]: {
+      margin: '15vh auto',
+      maxWidth: '44vh',
+      maxHeight: '66vh',
+    },
+  },
+  logoTitleContainer: {
+    [`${breakpoints.down('sm')} and (orientation: landscape)`]: {
+      display: 'flex',
+      alignItems: 'flex-end',
+    },
   },
   contentContainer: {
     flex: 'none',
     marginTop: 'auto',
     padding: 0,
-  },
-  contentIcon: {
-    paddingRight: spacing(1),
-  },
-  contentText: {
-    display: 'flex',
-    alignItems: 'center',
-    color: palette.grey[300],
-    letterSpacing: '.05rem',
-    lineHeight: 1.65,
-  },
-  name: {
-    margin: 0,
-    color: palette.grey[300],
-    fontSize: 32,
-    fontWeight: 600,
-    textTransform: 'uppercase',
-    letterSpacing: '0.3rem',
-    lineHeight: 1.1,
+    [`${breakpoints.down('sm')} and (orientation: landscape)`]: {
+      alignSelf: 'flex-end',
+    },
   },
   siteLogo: {
     marginTop: spacing(1),
@@ -69,10 +71,30 @@ const useStyles = makeStyles(({ palette, spacing }) => ({
     marginTop: spacing(1),
     marginBottom: 'auto',
     padding: 0,
+    [`${breakpoints.down('sm')} and (orientation: landscape)`]: {
+      marginLeft: spacing(3),
+      marginTop: spacing(2),
+    },
   },
   title: {
     color: palette.primary.main,
     letterSpacing: '.05rem',
+  },
+  contentIcon: {
+    paddingRight: spacing(1),
+  },
+  contentText: {
+    display: 'flex',
+    alignItems: 'center',
+    color: palette.grey[300],
+    letterSpacing: '.05rem',
+    lineHeight: 1.65,
+  },
+  name: {
+    color: palette.grey[300],
+    textTransform: 'uppercase',
+    letterSpacing: '0.2rem',
+    lineHeight: 1.1,
   },
 }));
 
@@ -82,21 +104,16 @@ export default (props) => {
 
   return (
     <PageLayout pageName="business-card" className={classes.businessCardLayout} disableFullscreen>
-      <SiteLogo className={classes.siteLogo} size={100} />
-      <Box
-        id={Utils.getElId('component', 'business-card-title')}
-        className={classnames(
-          Utils.getElClass('element', 'businessCard-title'),
-          classes.titleContainer
-        )}
-        disableTypography
-      >
-        <Typography className={classes.name} component="h2" variant="h3">
-          {t('components.BusinessCard.name')}
-        </Typography>
-        <Typography className={classes.title} component="span" variant="body1">
-          {t('components.BusinessCard.title')}
-        </Typography>
+      <Box className={classes.logoTitleContainer}>
+        <SiteLogo className={classes.siteLogo} size={100} />
+        <Box className={classes.titleContainer} disableTypography>
+          <Typography className={classes.name} component="h2" variant="h2">
+            {t('components.BusinessCard.name')}
+          </Typography>
+          <Typography className={classes.title} component="span" variant="body1">
+            {t('components.BusinessCard.title')}
+          </Typography>
+        </Box>
       </Box>
       <Box className={classes.contentContainer}>
         <Link href={`tel:${t('components.BusinessCard.phoneNumber')}`}>

@@ -1,9 +1,44 @@
 export default {
-  fontFamily:
-    'Nunito Sans, -apple-system, BlinkMacSystemFont, Roboto, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
+  htmlFontSize: 16,
+  fontFamily: [
+    'Nunito Sans',
+    '-apple-system',
+    'BlinkMacSystemFont',
+    'Ubuntu',
+    'Cantarell',
+    'Fira Sans',
+    'Droid Sans',
+    'Helvetica Neue',
+    'sans-serif',
+  ].join(','),
   fontSize: 14,
-  fontWeightLight: 200,
-  fontWeightRegular: 300,
-  fontWeightMedium: 500,
-  fontWeightBold: 600,
+  fontWeightLight: 300,
+  fontWeightRegular: 400,
+  fontWeightMedium: 600,
+  fontWeightBold: 800,
+  // TODO: Add text color to all variants
+  h1: {
+    fontSize: '3.052rem',
+    fontWeight: 600,
+  },
+  h2: {
+    fontSize: '2.441rem',
+    fontWeight: 600,
+  },
+  h3: {
+    fontSize: '1.953rem',
+    fontWeight: 600,
+  },
+  h4: {
+    fontSize: '1.563rem',
+    fontWeight: 600,
+  },
+  h5: {
+    fontSize: '1.254em',
+    fontWeight: 600,
+  },
+  h6: {
+    fontSize: '1rem',
+    fontWeight: 600,
+  },
 };

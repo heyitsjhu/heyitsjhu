@@ -47,7 +47,7 @@ export default (props) => {
         <SiteLogo id={Utils.getElId('site', 'logo')} className={classes.siteLogo} size={20} />
       </IconButton>
 
-      {/* <Box className={classes.iconSet}>
+      <Box className={classes.iconSet}>
         <IconButton aria-label="about this website" onClick={() => history.push(ROUTES.PURPOSE)}>
           <InfoOutlinedIcon />
         </IconButton>
@@ -59,7 +59,7 @@ export default (props) => {
         >
           <GitHubIcon fontSize="small" />
         </IconButton>
-      </Box> */}
+      </Box>
     </Box>
   );
 };

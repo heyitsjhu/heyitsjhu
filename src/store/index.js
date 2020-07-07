@@ -1,4 +1,5 @@
 import React, { createContext, useReducer } from 'react';
+import Logger from 'use-reducer-logger';
 import { STORAGE_KEY } from '../const';
 import {
   SET_LOADING,
@@ -8,6 +9,7 @@ import {
   UPDATE_LOCAL_STORAGE,
   UPDATE_SPLASH_LOGO,
 } from './types';
+import posts from '../posts';
 import { deepClone } from '../utils';
 
 const initialState = {
@@ -37,10 +39,15 @@ const initialState = {
     },
   },
   localStorage: { introViewed: false },
-  splashLogo: { started: false, playing: false, finished: false },
+  jottingPad: {
+    posts: posts,
+    settings: {},
+  },
+  splashLogo: { started: false, playing: false, finished: true },
+  language: 'en',
 };
 
-const appReducer = (state, action) => {
+const reducer = (state, action) => {
   const newState = deepClone(state);
 
   switch (action.type) {
@@ -92,6 +99,7 @@ const appReducer = (state, action) => {
 };
 
 const AppStore = ({ children }) => {
+  const appReducer = process.env.NODE_ENV === 'development' ? Logger(reducer) : reducer;
   const [state, dispatch] = useReducer(appReducer, initialState);
 
   return <AppContext.Provider value={[state, dispatch]}>{children}</AppContext.Provider>;

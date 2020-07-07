@@ -1,17 +1,25 @@
-import React, { useEffect, useReducer } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useContext, useEffect, useReducer, useRef } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, ButtonBase, Typography } from '@material-ui/core';
 import classnames from 'classnames';
 
-import posts from '../../blog/';
-import { Markdown } from '../../components';
+import { PostExcerpt } from '../../components';
+import { ROUTES } from '../../const';
+import { useEventListener } from '../../hooks/useEventListener';
 import { useCopy } from '../../i18n';
+import { AppContext } from '../../store';
 import PageLayout from '../PageLayout/PageLayout';
 import { initialState, stateReducer } from './utils';
 
 const useStyles = makeStyles(({ palette, spacing }) => ({
   jottingPadLayout: {},
+  masonryContainer: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    margin: 0,
+    paddingLeft: 0,
+  },
   paginationContainer: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -32,11 +40,14 @@ const useStyles = makeStyles(({ palette, spacing }) => ({
 }));
 
 export default (props) => {
+  const [appState, dispatch] = useContext(AppContext);
   const { t } = useCopy();
   const classes = useStyles();
   const history = useHistory();
-  const [state, dispatchState] = useReducer(stateReducer, initialState);
-  const { index, postContent } = state;
+  const location = useLocation();
+  const [state, dispatchState] = useReducer(stateReducer, appState.jottingPad);
+
+  // const { index, postContent } = state;
 
   const stateHandler = (key) => dispatchState({ key });
 
@@ -45,41 +56,28 @@ export default (props) => {
     stateHandler(key);
   };
 
-  const renderButton = (type, post) => {
-    return (
-      <Box className={classnames([classes.buttonContainer, classes[type]])}>
-        <Typography className={classes.buttonOverline} color="textPrimary" variant="overline">
-          {type}
-        </Typography>
-        <ButtonBase
-          className={classes.button}
-          onClick={() => handleClick(type)}
-          disableRipple
-          size=""
-        >
-          {post.title}
-        </ButtonBase>
-      </Box>
-    );
+  const handleExcerptClick = (postPart) => {
+    if (postPart) {
+      const slug = postPart.value;
+      history.push(`${ROUTES.JOTTINGPAD}/${slug}`);
+    }
   };
 
-  useEffect(() => {
-    const post = posts[index.current];
-
-    fetch(post.file)
-      .then((resp) => resp.text())
-      .then((post) => dispatchState({ key: 'post', post }));
-  }, [posts, state.index]);
-
-  // console.log(state);
+  console.log('JottingPad', state, location);
 
   return (
     <PageLayout pageName="jottingPad" className={classes.jottingPadLayout}>
-      <Markdown source={postContent} />
-      <Box className={classes.paginationContainer}>
-        {posts[index.prev] && renderButton('prev', posts[index.prev])}
-        <Box />
-        {posts[index.next] && renderButton('next', posts[index.next])}
+      <Box
+        className={classes.masonryContainer}
+        component={'ul'}
+        // options={{ columnWidth: 200 }}
+        // disableImagesLoaded={false}
+        // updateOnEachImageLoad={false}
+        // imagesLoadedOptions={imagesLoadedOptions}
+      >
+        {state.posts.map((post, i) => (
+          <PostExcerpt post={post} onExcerptClick={handleExcerptClick} />
+        ))}
       </Box>
     </PageLayout>
   );

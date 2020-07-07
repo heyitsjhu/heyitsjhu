@@ -1,0 +1,86 @@
+[
+  { "type": "slug", "value": "my-cool-sdfsf" },
+  {
+    "type": "date",
+    "value": "2020-06-23T23:34:05.530Z"
+  },
+  {
+    "type": "tags",
+    "value": ["tag1", "tag2"]
+  },
+  {
+    "type": "title",
+    "value": "This is a Heading 1"
+  },
+  {
+    "type": "content",
+    "value": [
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec lacinia justo, posuere vulputate justo. Aenean non diam id tortor eleifend porttitor. Nunc sit amet pulvinar tortor. Etiam pulvinar commodo diam sit amet mattis. Quisque euismod ut risus in vestibulum. Sed mollis semper erat posuere maximus. Morbi vehicula velit ac dolor porttitor luctus. Donec pellentesque ligula ut ipsum interdum, ut condimentum est pulvinar. Morbi consectetur, turpis quis blandit condimentum, arcu odio ultricies odio, quis vulputate massa libero non massa. Sed magna mauris, viverra ac elementum a, lacinia non tortor.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec lacinia justo, posuere vulputate justo. Aenean non diam id tortor eleifend porttitor. Nunc sit amet pulvinar tortor. Etiam pulvinar commodo diam sit amet mattis. Quisque euismod ut risus in vestibulum. Sed mollis semper erat posuere maximus. Morbi vehicula velit ac dolor porttitor luctus. Donec pellentesque ligula ut ipsum interdum, ut condimentum est pulvinar. Morbi consectetur, turpis quis blandit condimentum, arcu odio ultricies odio, quis vulputate massa libero non massa. Sed magna mauris, viverra ac elementum a, lacinia non tortor."
+    ]
+  },
+  {
+    "type": "h2",
+    "value": "This is a Heading 2"
+  },
+  {
+    "type": "content",
+    "value": [
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec lacinia justo, posuere vulputate justo. Aenean non diam id tortor eleifend porttitor. Nunc sit amet pulvinar tortor. Etiam pulvinar commodo diam sit amet mattis. Quisque euismod ut risus in vestibulum. Sed mollis semper erat posuere maximus. Morbi vehicula velit ac dolor porttitor luctus. Donec pellentesque ligula ut ipsum interdum, ut condimentum est pulvinar. Morbi consectetur, turpis quis blandit condimentum, arcu odio ultricies odio, quis vulputate massa libero non massa. Sed magna mauris, viverra ac elementum a, lacinia non tortor."
+    ]
+  },
+  {
+    "type": "image",
+    "value": {
+      "alt": "This is a picture of something cool.",
+      "src": "https://images.unsplash.com/photo-1520531158340-44015069e78e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3476&q=80"
+    }
+  },
+  {
+    "type": "content",
+    "value": [
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec lacinia justo, posuere vulputate justo. Aenean non diam id tortor eleifend porttitor. Nunc sit amet pulvinar tortor. Etiam pulvinar commodo diam sit amet mattis. Quisque euismod ut risus in vestibulum. Sed mollis semper erat posuere maximus. Morbi vehicula velit ac dolor porttitor luctus."
+    ]
+  },
+  {
+    "type": "h3",
+    "value": "This is a Heading 3"
+  },
+  {
+    "type": "content",
+    "value": [
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec lacinia justo, posuere vulputate justo. Aenean non diam id tortor eleifend porttitor. Nunc sit amet pulvinar tortor. Etiam pulvinar commodo diam sit amet mattis."
+    ]
+  },
+  {
+    "type": "blockquote",
+    "value": {
+      "quote": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "quoter": "This one person"
+    }
+  },
+  {
+    "type": "content",
+    "value": [
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec lacinia justo, posuere vulputate justo. Aenean non diam id tortor eleifend porttitor. Nunc sit amet pulvinar tortor. Etiam pulvinar commodo diam sit amet mattis."
+    ]
+  },
+  {
+    "type": "list",
+    "value": [
+      "Item 1",
+      {
+        "type": "list",
+        "value": ["nested", "nested?"]
+      },
+      "Item 3",
+      "Item 4"
+    ]
+  },
+  {
+    "type": "content",
+    "value": [
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec lacinia justo, posuere vulputate justo. Aenean non diam id tortor eleifend porttitor. Nunc sit amet pulvinar tortor. Etiam pulvinar commodo diam sit amet mattis."
+    ]
+  }
+]

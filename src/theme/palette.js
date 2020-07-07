@@ -27,6 +27,7 @@ export default {
     black,
     white,
   },
+  grey: greys,
   primary: {
     light: '#ffc97f',
     main: '#cc9851',
@@ -43,5 +44,4 @@ export default {
     primary: greys[200],
     secondary: black,
   },
-  grey: greys,
 };

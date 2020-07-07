@@ -34,35 +34,31 @@ const App = () => {
   const isHome = location.pathname === ROUTES.HOME;
 
   useEffect(() => {
-    // localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(STORAGE_KEY);
     const payload = JSON.parse(localStorage.getItem(STORAGE_KEY));
-    // Rule: Skipping Splash Animation
-    // if local storage exist in user's browser
+    // skips intro if local storage exist in user's browser
     if (payload) {
-      dispatch(updateSplashLogo('finish'));
       dispatch(updateLocalStorage(null, payload));
-      // if user's arrives without visiting the homepage first
+      dispatch(updateSplashLogo('finish'));
     } else if (!isHome && !appState.splashLogo.finished) {
+      // if user arrives without visiting the homepage first
       dispatch(updateSplashLogo('finish'));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     // fetchInitialCovidData(appState, dispatch);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (appState.splashLogo.finished && !appState.viewedIntro) {
       dispatch(updateLocalStorage('introViewed', true));
-      // plays particle canvas and homelogo animation
       const animation = getAnimation();
-      animation.play();
+      animation.play(); // plays particle canvas and homelogo animation
     }
   }, [appState.splashLogo.finished, appState.viewedIntro, dispatch]);
 
-  // console.log('APP STATE', appState);
+  console.log('APP STATE', appState);
 
   return (
     <>

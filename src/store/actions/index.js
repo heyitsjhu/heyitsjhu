@@ -5,6 +5,7 @@ import {
   UPDATE_CORONAVIRUS_SETTING,
   UPDATE_LOCAL_STORAGE,
   UPDATE_SPLASH_LOGO,
+  UPDATE_STATE,
 } from '../types';
 import { deepClone } from '../../utils';
 import { convertCovidHistoricalData } from '../../utils/dataHandlers';
@@ -75,4 +76,8 @@ export const updateLocalStorage = (key, payload) => {
 
 export const updateSplashLogo = (payload) => {
   return { type: UPDATE_SPLASH_LOGO, payload };
+};
+
+export const updateState = (key, payload) => {
+  return { type: UPDATE_STATE, key, payload };
 };

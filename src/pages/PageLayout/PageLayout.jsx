@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -10,13 +10,18 @@ import FullscreenIcon from '@material-ui/icons/Fullscreen';
 import FullscreenExitIcon from '@material-ui/icons/FullscreenExit';
 import classnames from 'classnames';
 
-import { IconButton } from '../../components';
+import IconButton from '../../components/IconButton/IconButton';
+
 import { ROUTES } from '../../const';
 import * as Utils from '../../utils';
 
 const useStyles = makeStyles(({ palette, transitions, spacing, zIndex }) => ({
   pageContainer: {
     zIndex: zIndex.pageLayout + ' !important',
+  },
+  scrollContainer: {
+    height: '100%',
+    overflowY: 'scroll',
   },
   pageLayout: {
     position: 'relative',
@@ -80,6 +85,7 @@ export default ({
   const location = useLocation();
   const isHome = location.pathname === ROUTES.HOME;
   const arrivedFromNav = location.state && location.state.fromNav;
+  const layoutRef = useRef(null);
 
   const handleFullscreenClick = () => setIsFullscreen(!isFullscreen);
 
@@ -96,6 +102,13 @@ export default ({
     }
   }, [isHome, arrivedFromNav]);
 
+  useEffect(() => {
+    if (layoutRef.current) {
+      // TODO: animate the scroll
+      layoutRef.current.scrollTo(0, 0);
+    }
+  }, [location.pathname]);
+
   return (
     <Modal
       aria-labelledby="simple-modal-title" // update to tie to page heading
@@ -109,6 +122,7 @@ export default ({
       open={isOpen}
       onClose={handleClose}
       closeAfterTransition
+      disableEnforceFocus
     >
       <Fade in={isOpen}>
         <Box
@@ -118,6 +132,7 @@ export default ({
             isFullscreen && classes.fullscreen,
             className,
           ])}
+          ref={layoutRef}
         >
           <Box className={classes.pageActions}>
             {pageActions && pageActions}

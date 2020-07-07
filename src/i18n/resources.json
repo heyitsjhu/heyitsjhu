@@ -20,6 +20,8 @@
       "pages.Coronavirus.FormGroup.CountrySelect.Label": "Select Countries",
       "pages.Coronavirus.Toggle.checkedLabel": "Map",
       "pages.Coronavirus.Toggle.uncheckedLabel": "Chart",
+      "pages.JottingPadPost.Button.previous": "Previous",
+      "pages.JottingPadPost.Button.next": "Next",
       "pages.pageNotFound.thisIsEmbarrassing": "Well... this is slightly embarrassing.",
       "pages.pageNotFound.theresNothingHere": "There's nothing here.",
       "pages.pageNotFound.backHomeButton": "Back to Home"

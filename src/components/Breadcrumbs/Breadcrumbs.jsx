@@ -13,13 +13,14 @@ const useStyles = makeStyles(({ palette, spacing, transitions, typography, zInde
   breadcrumbs: {
     position: 'absolute',
     top: spacing(5),
-    left: 13.5,
+    left: 13,
     opacity: 0,
     '& ol': {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
     },
+    '& .MuiBreadcrumbs-separator': { margin: 0 },
     zIndex: zIndex.breadcrumbs,
   },
   activeBreadcrumb: {
@@ -52,7 +53,7 @@ const useStyles = makeStyles(({ palette, spacing, transitions, typography, zInde
         transitionDelay: '0ms',
       },
       '& ~ span': {
-        left: spacing(3),
+        left: spacing(4),
         color: palette.primary.dark,
         opacity: 1,
         transitionDelay: `${transitions.duration.shorter * 2}ms`,
@@ -91,6 +92,7 @@ const useStyles = makeStyles(({ palette, spacing, transitions, typography, zInde
     transition: `all ${transitions.duration.complex}ms ${transitions.easing.easeInOut}`,
     zIndex: 0,
     visibility: 'hidden',
+    whiteSpace: 'nowrap',
   },
 }));
 
@@ -137,7 +139,7 @@ export default (props) => {
               )}
             />
             <Typography className={classes.linkText} variant="overline">
-              {urlSegment}
+              {urlSegment.replace(/-/gi, ' ')}
             </Typography>
           </Box>
         );

@@ -1,6 +1,16 @@
-## Naming Conventions
+## Libraries
 
-TBD
+[react-photo-gallery](http://neptunian.github.io/react-photo-gallery)
+[react-images](http://jossmac.github.io/react-images)
+
+[momentjs](https://momentjs.com)
+[use-reducer-logger](https://github.com/jefflombard/use-reducer-logger)
+
+### Tools
+
+### Miscellaneous
+
+[type-scale](https://type-scale.com)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

@@ -6,45 +6,50 @@ import {
   BusinessCardPage,
   CoronavirusPage,
   JottingPadPage,
+  JottingPadPostPage,
+  PhotographyPage,
   ProfilePage,
   PageNotFound,
 } from '../pages';
 
 export default () => (
   <Switch>
-    <Route exact path="/" />
-    {/* <Route exact path={ROUTES.POWEREDBYSCROLL}>
-      <PoweredByScroll />
+    <Route exact path={ROUTES.HOME} />
+    <Route exact path={ROUTES.POWEREDBYSCROLL}>
+      {/* <PoweredByScroll /> */}
     </Route>
     <Route exact path={ROUTES.CORONAVIRUS}>
       <CoronavirusPage />
     </Route>
     <Route exact path={ROUTES.DREAMISTLABS}>
-      <DreamistLabsPage />
+      {/* <DreamistLabsPage /> */}
     </Route>
     <Route exact path={ROUTES.CANDLEMONKEYS}>
-      <CandleMonkeysPage />
+      {/* <CandleMonkeysPage /> */}
     </Route>
     <Route exact path={ROUTES.JHUM}>
-      <JHUMPage />
+      {/* <JHUMPage /> */}
     </Route>
-
     <Route exact path={ROUTES.PROFILE}>
       <ProfilePage />
     </Route>
-    <Route exact path={ROUTES.JOTTINGPAD}>
-      <JottingPadPage />
-    </Route>
-    <Route exact path={ROUTES.JOTTINGPADPOST}>
+    <Route exact path={ROUTES.JOTTINGPAD_POST}>
       <JottingPadPostPage />
     </Route>
+    <Route path={ROUTES.JOTTINGPAD}>
+      <JottingPadPage />
+    </Route>
+
+    {/* <Route exact path={ROUTES.JOTTINGPAD_TAGS}>
+      <JottingPadTagsPage />
+    </Route> */}
     <Route exact path={ROUTES.PHOTOGRAPHY}>
-      <AboutPage />
+      <PhotographyPage />
     </Route>
 
     <Route exact path={ROUTES.PURPOSE}>
-      <AboutPage />
-    </Route> */}
+      {/* <AboutPage /> */}
+    </Route>
     <Route exact path={ROUTES.BUSINESSCARD}>
       <BusinessCardPage />
     </Route>

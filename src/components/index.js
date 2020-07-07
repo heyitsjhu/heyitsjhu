@@ -4,9 +4,10 @@ import Header from './Header/Header';
 import HomeLogoNavigation from './HomeLogoNavigation/HomeLogoNavigation';
 import IconButton from './IconButton/IconButton';
 import Loading from './Loading/Loading';
-import Markdown from './Markdown/Markdown';
 import Modal from './Modal/Modal';
 import ParticleCanvas from './ParticleCanvas/ParticleCanvas';
+import PostExcerpt from './PostExcerpt/PostExcerpt';
+import Post from './Post/Post';
 import SiteLogo from './SiteLogo/SiteLogo';
 import SplashLogo from './SplashLogo/SplashLogo';
 import Toggle from './Toggle/Toggle';
@@ -19,9 +20,10 @@ export {
   HomeLogoNavigation,
   IconButton,
   Loading,
-  Markdown,
   Modal,
   ParticleCanvas,
+  PostExcerpt,
+  Post,
   SiteLogo,
   SplashLogo,
   Toggle,

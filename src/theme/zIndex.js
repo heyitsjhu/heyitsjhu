@@ -2,7 +2,7 @@ export default {
   breadcrumbs: 100,
   footer: 100,
   header: 100,
-  homeLogo: 2,
+  homeLogo: 5,
   particleCanvas: 0,
   pageLayout: 10,
   pageLayoutPageActions: 20,

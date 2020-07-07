@@ -20,4 +20,5 @@ export const getElId = (type, id) => {
   type = type ? `${type}-` : '';
   return `${prefix}${type}${id || Math.random() * 100000}`;
 };
+
 export const preventDefault = (event) => event.preventDefault();
