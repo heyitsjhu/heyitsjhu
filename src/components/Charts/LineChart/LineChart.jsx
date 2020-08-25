@@ -184,11 +184,11 @@ export default (props) => {
     if (props.data && !chart.current.data.length) {
       chart.current.data = props.data.history[chartMetric].reverse();
 
-      console.log(
-        "incoming new data, should update current data",
-        props.data,
-        chart.current.data
-      );
+      // console.log(
+      //   "incoming new data, should update current data",
+      //   props.data,
+      //   chart.current.data
+      // );
     } else {
       am4core.array.each(chart.current.data, (dataRow, i) => {
         // console.log("Data Row " + i, dataRow);
@@ -209,7 +209,7 @@ export default (props) => {
   }, [props.id, chartData]);
 
   useEffect(() => {
-    console.log("chart data changed", chartData);
+    // console.log("chart data changed", chartData);
   }, [chartData]);
 
   // console.log("CHART", props, chartData);

@@ -176,8 +176,8 @@ export default (props) => {
                   key={path.d}
                   role={!isDisabled ? "button" : null}
                   tabIndex={!isDisabled ? 0 : -1}
-                  onClick={!isDisabled && handleClick(path.navId)}
-                  onKeyDown={!isDisabled && handleClick(path.navId)}
+                  onClick={!isDisabled ? handleClick(path.navId) : undefined}
+                  onKeyDown={!isDisabled ? handleClick(path.navId) : undefined}
                   onMouseOver={
                     !isDisabled && isInteractive ? handleMouseOver : undefined
                   }
