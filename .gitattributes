@@ -1,0 +1,3 @@
+git lfs track "*.jpeg"
+git lfs track "*.jpg"
+git lfs track "*.png"
