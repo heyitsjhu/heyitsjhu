@@ -1,20 +1,26 @@
 /** Particle Canvas - Credit: Nokey (https://codepen.io/jkiss/pen/OVEeqK) */
-import React, { useEffect, useRef, useState } from 'react';
-import classnames from 'classnames';
-import { makeStyles } from '@material-ui/core/styles';
-import { useEventListener } from '../../hooks/useEventListener';
-import * as Utils from '../../utils';
+import React, { useEffect, useRef, useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import classnames from "classnames";
+import { useEventListener } from "../../hooks/useEventListener";
+import * as Utils from "../../utils";
 
-import getAnimation from './anime';
-import { getDisOf, getRandomSpeed, randomArrayItem, randomNumFrom, randomSidePos } from './utils';
+import getAnimation from "./anime";
+import {
+  getDisOf,
+  getRandomSpeed,
+  randomArrayItem,
+  randomNumFrom,
+  randomSidePos,
+} from "./utils";
 
 const useStyles = makeStyles((theme) => ({
   canvas: {
-    position: 'absolute',
+    position: "fixed",
     top: 0,
     left: 0,
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
     opacity: 0,
     zIndex: theme.zIndex.particleCanvas,
   },
@@ -42,14 +48,14 @@ export default (props) => {
   const linkLineWidth = props.linkWidth || 0.8;
   const linkLineDistantLimit = props.linkDistanceLimit || 260;
   // const slowMultiplier = props.slowMultiplier || 1;
-  const cursorParticle = { x: 0, y: 0, vx: 0, vy: 0, r: 0, type: 'mouse' };
+  const cursorParticle = { x: 0, y: 0, vx: 0, vy: 0, r: 0, type: "mouse" };
 
   const initCanvas = () => {
-    canvas.setAttribute('width', window.innerWidth);
-    canvas.setAttribute('height', window.innerHeight);
+    canvas.setAttribute("width", window.innerWidth);
+    canvas.setAttribute("height", window.innerHeight);
 
-    setCanvasWidth(parseInt(canvas.getAttribute('width')));
-    setCanvasHeight(parseInt(canvas.getAttribute('height')));
+    setCanvasWidth(parseInt(canvas.getAttribute("width")));
+    setCanvasHeight(parseInt(canvas.getAttribute("height")));
   };
 
   const initParticles = (numSize) => {
@@ -57,8 +63,8 @@ export default (props) => {
       particles.push({
         x: randomSidePos(canvasWidth),
         y: randomSidePos(canvasHeight),
-        vx: getRandomSpeed('top')[0] / slowMultiplier,
-        vy: getRandomSpeed('top')[1] / slowMultiplier,
+        vx: getRandomSpeed("top")[0] / slowMultiplier,
+        vy: getRandomSpeed("top")[1] / slowMultiplier,
         r: particleRadius,
         alpha: 1,
         phase: randomNumFrom(0, 10),
@@ -67,9 +73,9 @@ export default (props) => {
   };
 
   const getRandomParticle = () => {
-    const pos = randomArrayItem(['top', 'right', 'bottom', 'left']);
+    const pos = randomArrayItem(["top", "right", "bottom", "left"]);
     switch (pos) {
-      case 'top':
+      case "top":
         return {
           x: randomSidePos(canvasWidth),
           y: -particleRadius,
@@ -79,7 +85,7 @@ export default (props) => {
           alpha: 1,
           phase: randomNumFrom(0, 10),
         };
-      case 'right':
+      case "right":
         return {
           x: canvasWidth + particleRadius,
           y: randomSidePos(canvasHeight),
@@ -89,7 +95,7 @@ export default (props) => {
           alpha: 1,
           phase: randomNumFrom(0, 10),
         };
-      case 'bottom':
+      case "bottom":
         return {
           x: randomSidePos(canvasWidth),
           y: canvasHeight + particleRadius,
@@ -99,7 +105,7 @@ export default (props) => {
           alpha: 1,
           phase: randomNumFrom(0, 10),
         };
-      case 'left':
+      case "left":
         return {
           x: -particleRadius,
           y: randomSidePos(canvasHeight),
@@ -117,7 +123,7 @@ export default (props) => {
   const renderParticles = () => {
     const { r, g, b } = particleColor;
     Array.prototype.forEach.call(particles, function (p, i) {
-      if (!p.hasOwnProperty('type')) {
+      if (!p.hasOwnProperty("type")) {
         ctx.fillStyle = `rgba(${r},${g},${b},${p.alpha})`;
         ctx.beginPath();
         ctx.arc(p.x, p.y, particleRadius, 0, Math.PI * 2, true);
@@ -153,7 +159,12 @@ export default (props) => {
       p.x += p.vx;
       p.y += p.vy;
 
-      if (p.x > -50 && p.x < canvasWidth + 50 && p.y > -50 && p.y < canvasHeight + 50) {
+      if (
+        p.x > -50 &&
+        p.x < canvasWidth + 50 &&
+        p.y > -50 &&
+        p.y < canvasHeight + 50
+      ) {
         newParticles.push(p);
       }
 
@@ -190,7 +201,7 @@ export default (props) => {
   const handleMouseLeave = () => {
     let newParticles = [];
     Array.prototype.forEach.call(particles, (p) => {
-      if (!p.hasOwnProperty('type')) {
+      if (!p.hasOwnProperty("type")) {
         newParticles.push(p);
       }
     });
@@ -203,10 +214,10 @@ export default (props) => {
     cursorParticle.y = event.pageY;
   };
 
-  useEventListener('resize', initCanvas);
-  useEventListener('mouseenter', handleMouseEnter, canvas);
-  useEventListener('mouseleave', handleMouseLeave, canvas);
-  useEventListener('mousemove', handleMouseMove, canvas);
+  useEventListener("resize", initCanvas);
+  useEventListener("mouseenter", handleMouseEnter, canvas);
+  useEventListener("mouseleave", handleMouseLeave, canvas);
+  useEventListener("mousemove", handleMouseMove, canvas);
 
   useEffect(() => {
     if (slowMultiplier !== props.slowMultiplier) {
@@ -222,17 +233,15 @@ export default (props) => {
     if (!ctx && canvas) {
       setCanvasLeft(canvas.offsetLeft + canvas.clientLeft);
       setCanvasTop(canvas.offsetTop + canvas.clientTop);
-      setCtx(canvas.getContext('2d'));
+      setCtx(canvas.getContext("2d"));
       initCanvas();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ctx, canvas]);
+  }, [ctx, canvas]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     initParticles(particleCount);
     window.requestAnimationFrame(renderParticleCanvas);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [canvasWidth, canvasHeight]);
+  }, [canvasWidth, canvasHeight]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (props.isReady) {
@@ -248,8 +257,11 @@ export default (props) => {
   return (
     <canvas
       id={props.id}
-      className={classnames(Utils.getElClass('page', 'particleCanvas'), classes.canvas)}
+      className={classnames(
+        Utils.getElClass("page", "particleCanvas"),
+        classes.canvas
+      )}
       ref={canvasRef}
-    ></canvas>
+    />
   );
 };

@@ -2,11 +2,11 @@
   { "type": "slug", "value": "my-cool-dsfasdfsa" },
   {
     "type": "date",
-    "value": "2020-06-23T23:34:05.530Z"
+    "value": "2020-06-28T23:34:05.530Z"
   },
   {
     "type": "tags",
-    "value": ["tag1", "tag2"]
+    "value": ["tag3", "tag2"]
   },
   {
     "type": "title",

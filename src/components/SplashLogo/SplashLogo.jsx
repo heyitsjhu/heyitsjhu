@@ -1,40 +1,40 @@
-import React, { useContext, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
-import classnames from 'classnames';
+import React, { useContext, useEffect } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Box from "@material-ui/core/Box";
+import classnames from "classnames";
 
-import { AppContext } from '../../store';
-import { updateSplashLogo } from '../../store/actions';
-import getAnimation from './anime';
-import paths from './paths';
+import { AppContext } from "../../store";
+import { updateSplashLogo } from "../../store/actions";
+import getAnimation from "./anime";
+import paths from "./paths";
 
 const useStyles = makeStyles((theme) => ({
   splashLogoContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'nowrap',
-    position: 'fixed',
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "nowrap",
+    position: "fixed",
     top: 0,
     left: 0,
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
     backgroundColor: theme.palette.common.white,
     zIndex: 1000,
   },
   curtains: {
-    position: 'relative',
+    position: "relative",
     top: 0,
     height: 0,
-    width: '50%',
-    backgroundColor: '#101010',
+    width: "50%",
+    backgroundColor: "#101010",
     opacity: 0,
-    '&::before': {
+    "&::before": {
       content: '""',
-      position: 'fixed',
+      position: "fixed",
       top: 0,
-      width: 'calc(50%)',
-      height: '100%',
-      backgroundColor: '#101010',
+      width: "calc(50%)",
+      height: "100%",
+      backgroundColor: "#101010",
       zIndex: -1,
     },
   },
@@ -47,22 +47,22 @@ const useStyles = makeStyles((theme) => ({
     borderLeft: `3px solid ${theme.palette.grey[600]}`,
   },
   logoSvg: {
-    position: 'fixed',
-    top: '50%',
-    left: '50%',
+    position: "fixed",
+    top: "50%",
+    left: "50%",
     minWidth: 80,
     maxWidth: 150,
-    transform: 'translate(-50%, -50%)',
+    transform: "translate(-50%, -50%)",
     opacity: 1,
   },
   svgGroup: {
-    stroke: 'none',
-    strokeWidth: '1',
-    fill: 'none',
-    fillRule: 'evenodd',
+    stroke: "none",
+    strokeWidth: "1",
+    fill: "none",
+    fillRule: "evenodd",
   },
   svgPath: {
-    fill: '#262b37',
+    fill: "#262b37",
     opacity: 0,
   },
 }));
@@ -70,14 +70,14 @@ const useStyles = makeStyles((theme) => ({
 export default (props) => {
   const [appState, dispatch] = useContext(AppContext);
   const classes = useStyles();
-  const viewBox = props.viewBox || '0 0 528 566';
+  const viewBox = props.viewBox || "0 0 528 566";
 
   const onStartAnimation = (anim) => {
-    dispatch(updateSplashLogo('start'));
+    dispatch(updateSplashLogo("start"));
   };
 
   const onEndAnimation = (anim) => {
-    dispatch(updateSplashLogo('finish'));
+    dispatch(updateSplashLogo("finish"));
   };
 
   useEffect(() => {
@@ -90,30 +90,38 @@ export default (props) => {
 
   return (
     !appState.splashLogo.finished && (
-      <Box className={classnames('dl-splash-container', classes.splashLogoContainer)}>
+      <Box
+        className={classnames(
+          "dl-splash-container",
+          classes.splashLogoContainer
+        )}
+      >
         <Box
           className={classnames([
-            'dl-splash-curtain',
-            'dl-splash-curtain-left',
+            "dl-splash-curtain",
+            "dl-splash-curtain-left",
             classes.curtains,
             classes.curtainLeft,
           ])}
         ></Box>
         <Box
           className={classnames([
-            'dl-splash-curtain',
-            'dl-splash-curtain-right',
+            "dl-splash-curtain",
+            "dl-splash-curtain-right",
             classes.curtains,
             classes.curtainRight,
           ])}
         ></Box>
-        <svg className={classnames('dl-splash-logo', classes.logoSvg)} viewBox={viewBox}>
+        <svg
+          className={classnames("dl-splash-logo", classes.logoSvg)}
+          viewBox={viewBox}
+        >
           <g className={classnames(classes.svgGroup)}>
             {paths.map((path) => (
               <path
                 className={classnames([
-                  path.className === 'set1' && 'logo__set--1',
-                  path.className === 'set2' && 'logo__set--2',
+                  path.className === "set1" && "logo__set--1",
+                  path.className === "set2" && "logo__set--2",
                   classes.svgPath,
                 ])}
                 d={path.d}

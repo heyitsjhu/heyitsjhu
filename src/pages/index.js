@@ -1,20 +1,18 @@
-import BusinessCardPage from './BusinessCard/BusinessCard';
-import CoronavirusPage from './Coronavirus/Coronavirus';
-import JottingPadPage from './JottingPad/JottingPad';
-import JottingPadPostPage from './JottingPadPost/JottingPadPost';
-import JottingPadTagsPage from './JottingPadTags/JottingPadTags';
-import PhotographyPage from './Photography/Photography';
-import ProfilePage from './Profile/Profile';
+import BackwardsClockPage from "./BackwardsClock/BackwardsClock";
+import CoronavirusPage from "./Coronavirus/Coronavirus";
+import JottingPadPage from "./JottingPad/JottingPad";
+import JottingPadPostPage from "./JottingPadPost/JottingPadPost";
+import PhotographyPage from "./Photography/Photography";
+import ProfilePage from "./Profile/Profile";
 
-import PageLayout from './PageLayout/PageLayout';
-import PageNotFound from './PageNotFound/PageNotFound';
+import PageLayout from "./PageLayout/PageLayout";
+import PageNotFound from "./PageNotFound/PageNotFound";
 
 export {
-  BusinessCardPage,
+  BackwardsClockPage,
   CoronavirusPage,
   JottingPadPage,
   JottingPadPostPage,
-  JottingPadTagsPage,
   PageLayout,
   PageNotFound,
   PhotographyPage,

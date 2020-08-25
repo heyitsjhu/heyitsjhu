@@ -5,6 +5,10 @@
     "value": "2020-06-23T23:34:05.530Z"
   },
   {
+    "type": "coverImage",
+    "src": "https://i.redd.it/0tpydhtd01b51.jpg"
+  },
+  {
     "type": "tags",
     "value": ["tag1", "tag2"]
   },
@@ -15,8 +19,8 @@
   {
     "type": "content",
     "value": [
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec lacinia justo, posuere vulputate justo. Aenean non diam id tortor eleifend porttitor. Nunc sit amet pulvinar tortor. Etiam pulvinar commodo diam sit amet mattis. Quisque euismod ut risus in vestibulum. Sed mollis semper erat posuere maximus. Morbi vehicula velit ac dolor porttitor luctus. Donec pellentesque ligula ut ipsum interdum, ut condimentum est pulvinar. Morbi consectetur, turpis quis blandit condimentum, arcu odio ultricies odio, quis vulputate massa libero non massa. Sed magna mauris, viverra ac elementum a, lacinia non tortor.",
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec lacinia justo, posuere vulputate justo. Aenean non diam id tortor eleifend porttitor. Nunc sit amet pulvinar tortor. Etiam pulvinar commodo diam sit amet mattis. Quisque euismod ut risus in vestibulum. Sed mollis semper erat posuere maximus. Morbi vehicula velit ac dolor porttitor luctus. Donec pellentesque ligula ut ipsum interdum, ut condimentum est pulvinar. Morbi consectetur, turpis quis blandit condimentum, arcu odio ultricies odio, quis vulputate massa libero non massa. Sed magna mauris, viverra ac elementum a, lacinia non tortor."
+      "89023 -- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec lacinia justo, posuere vulputate justo. Aenean non diam id tortor eleifend porttitor. Nunc sit amet pulvinar tortor. Etiam pulvinar commodo diam sit amet mattis. Quisque euismod ut risus in vestibulum. Sed mollis semper erat posuere maximus. Morbi vehicula velit ac dolor porttitor luctus. Donec pellentesque ligula ut ipsum interdum, ut condimentum est pulvinar. Morbi consectetur, turpis quis blandit condimentum, arcu odio ultricies odio, quis vulputate massa libero non massa. Sed magna mauris, viverra ac elementum a, lacinia non tortor.",
+      "684950 -- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec lacinia justo, posuere vulputate justo. Aenean non diam id tortor eleifend porttitor. Nunc sit amet pulvinar tortor. Etiam pulvinar commodo diam sit amet mattis. Quisque euismod ut risus in vestibulum. Sed mollis semper erat posuere maximus. Morbi vehicula velit ac dolor porttitor luctus. Donec pellentesque ligula ut ipsum interdum, ut condimentum est pulvinar. Morbi consectetur, turpis quis blandit condimentum, arcu odio ultricies odio, quis vulputate massa libero non massa. Sed magna mauris, viverra ac elementum a, lacinia non tortor."
     ]
   },
   {

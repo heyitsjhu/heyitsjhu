@@ -1,19 +1,13 @@
-import React, { useCallback, useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
-import Link from '@material-ui/core/Link';
-import Typography from '@material-ui/core/Typography';
-import ReportProblemIcon from '@material-ui/icons/ReportProblem';
-import PhotoGallery from 'react-photo-gallery';
-import Carousel, { Modal, ModalGateway } from 'react-images';
+import React, { useCallback, useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import PhotoGallery from "react-photo-gallery";
+import Carousel, { Modal, ModalGateway } from "react-images";
 
-import GalleryImage from '../../components/GalleryImage/GalleryImage';
-import { ROUTES } from '../../const';
-import { useCopy } from '../../i18n';
-import PageLayout from '../PageLayout/PageLayout';
+import GalleryImage from "../../components/GalleryImage/GalleryImage";
+import { useCopy } from "../../i18n";
+import PageLayout from "../PageLayout/PageLayout";
 
-import photos from './photos';
+import photos from "./photos";
 
 const useStyles = makeStyles(({ palette, spacing }) => ({
   photographyLayout: {
@@ -30,7 +24,6 @@ export default (props) => {
   const [viewerIsOpen, setViewerIsOpen] = useState(false);
 
   const openLightbox = useCallback((event, { photo, index }) => {
-    console.log('is this working?', photo, index);
     setCurrentImage(index);
     setViewerIsOpen(true);
   }, []);
@@ -47,7 +40,7 @@ export default (props) => {
         key={key}
         direction={direction}
         photo={photo}
-        margin={'2px'}
+        margin={"2px"}
         top={top}
         left={left}
         index={index}

@@ -1,19 +1,36 @@
-import React, { createContext, useReducer } from 'react';
-import Logger from 'use-reducer-logger';
-import { STORAGE_KEY } from '../const';
+import React, { createContext, useReducer } from "react";
+import ReducerLogger from "use-reducer-logger";
+import { ANCHOR_DATE, STORAGE_KEY } from "../const";
 import {
   SET_LOADING,
-  UPDATE_STATE,
+  UPDATE_STORE,
   UPDATE_CORONAVIRUS_DATA,
   UPDATE_CORONAVIRUS_SETTING,
   UPDATE_LOCAL_STORAGE,
   UPDATE_SPLASH_LOGO,
-} from './types';
-import posts from '../posts';
-import { deepClone } from '../utils';
+} from "./types";
+import posts from "../posts";
+import { deepClone } from "../utils/deepClone";
+import { getBackwardsDate } from "../helpers";
+
+export const STORE_KEYS = {
+  BACKWARDS_CLOCK: "backwardsClock",
+  CORONAVIRUS: "coronavirus",
+  LOCAL_STORAGE: "localStorage",
+  JOTTING_PAD: "jottingPad",
+  SPLASH_LOGO: "splashLogo",
+  LANGUAGE: "language",
+};
 
 const initialState = {
-  coronavirus: {
+  [STORE_KEYS.LANGUAGE]: "en",
+  [STORE_KEYS.BACKWARDS_CLOCK]: {
+    dateToday: new Date(),
+    dateAnchor: new Date(ANCHOR_DATE),
+    dateBackwards: getBackwardsDate(new Date(), new Date(ANCHOR_DATE)),
+    wikiData: null,
+  },
+  [STORE_KEYS.CORONAVIRUS]: {
     countries: [],
     history: {
       casesNew: [],
@@ -34,17 +51,20 @@ const initialState = {
     statistics: [],
     lastFetched: null,
     loading: false,
-    settings: {
-      selectedCountries: ['usa'],
+    controlPanel: {
+      chartMetric: "casesNew",
+      countriesToFetch: [],
+      selectedCountries: ["USA", "Brazil", "Italy", "S-Korea", "Spain"],
+      showGlobalTotals: false,
     },
   },
-  localStorage: { introViewed: false },
-  jottingPad: {
+  [STORE_KEYS.LOCAL_STORAGE]: { introViewed: false },
+  [STORE_KEYS.JOTTING_PAD]: {
+    activeTag: "all",
     posts: posts,
-    settings: {},
+    tags: ["all", "tag1", "tag2", "tag3"],
   },
-  splashLogo: { started: false, playing: false, finished: true },
-  language: 'en',
+  [STORE_KEYS.SPLASH_LOGO]: { started: false, playing: false, finished: false },
 };
 
 const reducer = (state, action) => {
@@ -54,8 +74,12 @@ const reducer = (state, action) => {
     case SET_LOADING:
       newState[action.key].loading = action.payload;
       break;
-    case UPDATE_STATE:
-      newState[action.key] = action.payload;
+    case UPDATE_STORE:
+      if (!action.outerKey || !action.innerKey) return state;
+      newState[action.outerKey] = {
+        ...newState[action.outerKey],
+        [action.innerKey]: action.payload,
+      };
       break;
     case UPDATE_CORONAVIRUS_DATA:
       if (action.key) {
@@ -65,7 +89,7 @@ const reducer = (state, action) => {
       }
       break;
     case UPDATE_CORONAVIRUS_SETTING:
-      newState.coronavirus.settings[action.key] = action.payload;
+      newState.coronavirus.controlPanel[action.key] = action.payload;
       break;
     case UPDATE_LOCAL_STORAGE:
       if (action.key) {
@@ -77,13 +101,13 @@ const reducer = (state, action) => {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(newState.localStorage));
       break;
     case UPDATE_SPLASH_LOGO:
-      if (action.payload === 'start') {
+      if (action.payload === "start") {
         newState.splashLogo = {
           ...newState.splashLogo,
           started: true,
           playing: true,
         };
-      } else if (action.payload === 'finish') {
+      } else if (action.payload === "finish") {
         newState.splashLogo = {
           started: false,
           playing: false,
@@ -92,17 +116,22 @@ const reducer = (state, action) => {
       }
       break;
     default:
-      throw new Error('Did not find match for reducer action');
+      throw new Error("Did not find match for reducer action");
   }
 
   return newState;
 };
 
 const AppStore = ({ children }) => {
-  const appReducer = process.env.NODE_ENV === 'development' ? Logger(reducer) : reducer;
+  const appReducer =
+    process.env.NODE_ENV === "development" ? ReducerLogger(reducer) : reducer;
   const [state, dispatch] = useReducer(appReducer, initialState);
 
-  return <AppContext.Provider value={[state, dispatch]}>{children}</AppContext.Provider>;
+  return (
+    <AppContext.Provider value={[state, dispatch]}>
+      {children}
+    </AppContext.Provider>
+  );
 };
 
 export const AppContext = createContext(initialState);

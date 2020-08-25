@@ -1,21 +1,21 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
-import Link from '@material-ui/core/Link';
-import Typography from '@material-ui/core/Typography';
-import ReportProblemIcon from '@material-ui/icons/ReportProblem';
+import React from "react";
+import { useHistory } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
+import Box from "@material-ui/core/Box";
+import Link from "@material-ui/core/Link";
+import Typography from "@material-ui/core/Typography";
+import ReportProblemIcon from "@material-ui/icons/ReportProblem";
 
-import { ROUTES } from '../../const';
-import { useCopy } from '../../i18n';
-import PageLayout from '../PageLayout/PageLayout';
+import { ROUTES } from "../../const";
+import { useCopy } from "../../i18n";
+import PageLayout from "../PageLayout/PageLayout";
 
 const useStyles = makeStyles(({ palette, spacing }) => ({
   notFoundLayout: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
   },
   iconContainer: {
     margin: spacing(2),
@@ -35,16 +35,16 @@ export default (props) => {
   return (
     <PageLayout pageName="notFound" className={classes.notFoundLayout}>
       <Typography color="textPrimary" variant="h6">
-        {t('pages.pageNotFound.thisIsEmbarrassing')}
+        {t("pages.PageNotFound.thisIsEmbarrassing")}
       </Typography>
       <Box className={classes.iconContainer}>
         <ReportProblemIcon color="primary" style={{ fontSize: 96 }} />
       </Box>
       <Typography color="textPrimary" variant="subtitle1">
-        {t('pages.pageNotFound.theresNothingHere')}
+        {t("pages.PageNotFound.theresNothingHere")}
       </Typography>
       <Link color="primary" href="#" onClick={handleClick}>
-        {t('pages.pageNotFound.backHomeButton')}
+        {t("pages.PageNotFound.backHomeButton")}
       </Link>
     </PageLayout>
   );

@@ -1,45 +1,45 @@
-import { deepClone } from './deepClone';
+import { deepClone } from "./deepClone";
 
 export const COVID_CHART_DATA_LABELS = [
-  { key: 'casesNew', label: 'New Cases' },
-  { key: 'casesActive', label: 'Active Cases' },
-  { key: 'casesCritical', label: 'Critical Cases' },
-  { key: 'casesRecovered', label: 'Recovered Cases' },
-  { key: 'casesTotal', label: 'Total Cases' },
-  { key: 'deathsNew', label: 'New Deaths' },
-  { key: 'deathsTotal', label: 'Total Deaths' },
-  { key: 'testsTotal', label: 'Total Tests' },
+  { key: "casesNew", label: "New Cases" },
+  { key: "casesActive", label: "Active Cases" },
+  { key: "casesCritical", label: "Critical Cases" },
+  { key: "casesRecovered", label: "Recovered Cases" },
+  { key: "casesTotal", label: "Total Cases" },
+  { key: "deathsNew", label: "New Deaths" },
+  { key: "deathsTotal", label: "Total Deaths" },
+  { key: "testsTotal", label: "Total Tests" },
 ];
 
 // Given a historical state's key, returns an array containing
 // the keys needed to retrieve the corresponding historical data.
 const getDataMapping = (historicalKey) => {
-  if (historicalKey.includes('1MPop')) {
+  if (historicalKey.includes("1MPop")) {
     const match = /(1MPop)/.exec(historicalKey);
     const firstKey = historicalKey.slice(0, match.index);
-    return [firstKey, '1M_pop'];
-  } else if (historicalKey.includes('New')) {
+    return [firstKey, "1M_pop"];
+  } else if (historicalKey.includes("New")) {
     const match = /(New)/.exec(historicalKey);
     const firstKey = historicalKey.slice(0, match.index);
-    return [firstKey, 'new'];
-  } else if (historicalKey.includes('Active')) {
+    return [firstKey, "new"];
+  } else if (historicalKey.includes("Active")) {
     const match = /(Active)/.exec(historicalKey);
     const firstKey = historicalKey.slice(0, match.index);
-    return [firstKey, 'active'];
-  } else if (historicalKey.includes('Critical')) {
+    return [firstKey, "active"];
+  } else if (historicalKey.includes("Critical")) {
     const match = /(Critical)/.exec(historicalKey);
     const firstKey = historicalKey.slice(0, match.index);
-    return [firstKey, 'critical'];
-  } else if (historicalKey.includes('Recovered')) {
+    return [firstKey, "critical"];
+  } else if (historicalKey.includes("Recovered")) {
     const match = /(Recovered)/.exec(historicalKey);
     const firstKey = historicalKey.slice(0, match.index);
-    return [firstKey, 'recovered'];
-  } else if (historicalKey.includes('Total')) {
+    return [firstKey, "recovered"];
+  } else if (historicalKey.includes("Total")) {
     const match = /(Total)/.exec(historicalKey);
     const firstKey = historicalKey.slice(0, match.index);
-    return [firstKey, 'total'];
-  } else if (historicalKey === 'population') {
-    return ['population'];
+    return [firstKey, "total"];
+  } else if (historicalKey === "population") {
+    return ["population"];
   } else {
     return [];
   }
@@ -63,15 +63,18 @@ export const convertCovidHistoricalData = (historicalState, countriesData) => {
 
   countriesData.forEach((countryData) => {
     if (countryData.length > 0) {
-      newHistoryState._retrievedCountries.push(countryData[0].country.toLowerCase());
+      // just tracks which countries we've fetched data for already.
+      newHistoryState._retrievedCountries.push(countryData[0].country);
     }
 
     countryData.reduce(getEndOfDayStatistic, []).forEach((dayStat) => {
-      const country = dayStat.country.toLowerCase();
+      const country = dayStat.country;
       const metadata = { day: dayStat.day, time: dayStat.time };
 
       historicalDataMapping.forEach(({ stateKey, dataMap }) => {
-        const daysData = newHistoryState[stateKey].find(({ day }) => day === metadata.day);
+        const daysData = newHistoryState[stateKey].find(
+          ({ day }) => day === metadata.day
+        );
 
         switch (dataMap.length) {
           case 2:
@@ -85,7 +88,10 @@ export const convertCovidHistoricalData = (historicalState, countriesData) => {
           case 1:
             daysData
               ? (daysData[country] = dayStat[dataMap[0]])
-              : newHistoryState[stateKey].push({ ...metadata, [country]: dayStat[dataMap[0]] });
+              : newHistoryState[stateKey].push({
+                  ...metadata,
+                  [country]: dayStat[dataMap[0]],
+                });
             break;
           default:
             break;
@@ -108,12 +114,14 @@ const getEndOfDayStatistic = (accItem, currItem) => {
 
 // Converts Covid-19 statistics data for amCharts ingestion.
 export const convertCovidStatisticsData = (data) => {
-  const replaceRegex = new RegExp(/-/, 'gi');
+  const replaceRegex = new RegExp(/-/, "gi");
 
   return data.statistics
     .map(({ country, cases, deaths, tests, day, time }) => {
-      const countryName = country.replace(replaceRegex, ' ');
-      const countryData = data.countries.find((countryItem) => countryItem.name === countryName);
+      const countryName = country.replace(replaceRegex, " ");
+      const countryData = data.countries.find(
+        (countryItem) => countryItem.name === countryName
+      );
 
       return {
         id: countryData ? countryData.alpha2code : undefined,
@@ -130,5 +138,5 @@ export const convertCovidStatisticsData = (data) => {
         time,
       };
     })
-    .filter((dataItem) => typeof dataItem.id !== 'undefined');
+    .filter((dataItem) => typeof dataItem.id !== "undefined");
 };
