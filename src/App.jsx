@@ -72,7 +72,7 @@ const App = () => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    fetchInitialCovidData(appState, dispatch);
+    // fetchInitialCovidData(appState, dispatch);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {

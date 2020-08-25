@@ -146,7 +146,7 @@ export default (props) => {
           <Box className={classes.contentContainer}>
             <Link
               aria-label={t("a11y.ariaLabel.businessCardPhone")}
-              href={`tel:${process.env.REACT_APP_PHONE_NUMBER}`}
+              href={`tel:${t("components.BusinessCard.phoneNumber")}`}
             >
               <Typography
                 className={classes.contentText}
@@ -154,12 +154,12 @@ export default (props) => {
                 variant="body2"
               >
                 <CallIcon className={classes.contentIcon} />+
-                {process.env.REACT_APP_PHONE_NUMBER}
+                {t("components.BusinessCard.phoneNumber")}
               </Typography>
             </Link>
             <Link
               aria-label={t("a11y.ariaLabel.businessCardEmail")}
-              href={`mailto:${process.env.REACT_APP_EMAIL_ADDRESS}`}
+              href={`mailto:${t("components.BusinessCard.emailAddress")}`}
             >
               <Typography
                 className={classes.contentText}
@@ -167,7 +167,7 @@ export default (props) => {
                 variant="body2"
               >
                 <EmailIcon className={classes.contentIcon} />
-                {process.env.REACT_APP_EMAIL_ADDRESS}
+                {t("components.BusinessCard.emailAddress")}
               </Typography>
             </Link>
             <Typography
