@@ -153,7 +153,7 @@ export default (props) => {
                 component="span"
                 variant="body2"
               >
-                <CallIcon className={classes.contentIcon} />+
+                <CallIcon className={classes.contentIcon} />
                 {t("components.BusinessCard.phoneNumber")}
               </Typography>
             </Link>

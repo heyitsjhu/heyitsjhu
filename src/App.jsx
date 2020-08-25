@@ -32,22 +32,21 @@ const useStyles = makeStyles(({ shared, spacing }) => ({
     border: shared.borderUncolored,
     transition: `all 600ms linear`,
     overflow: "auto",
-    '&:not([class*="isHome"])': {
-      display: "block",
-      margin: spacing(5),
-      height: `calc(100% - ${spacing(10)}px)`,
-      border: shared.borderDefault,
-      "&::before": {
-        content: '""',
-        position: "fixed",
-        width: `calc(100% - ${spacing(10) + 2}px)`,
-        height: `calc(100% - ${spacing(10) + 2}px)`,
-        backgroundColor: "rgba(0,0,0,0.5)",
-        zIndex: 2,
-      },
-    },
   },
-  isHome: {}, // used to populate mui classname
+  isNotHome: {
+    display: "block",
+    margin: spacing(5),
+    height: `calc(100% - ${spacing(10)}px)`,
+    border: shared.borderDefault,
+    "&::before": {
+      content: '""',
+      position: "fixed",
+      width: `calc(100% - ${spacing(10) + 2}px)`,
+      height: `calc(100% - ${spacing(10) + 2}px)`,
+      backgroundColor: "rgba(0,0,0,0.5)",
+      zIndex: 2,
+    },
+  }, // used to populate mui classname
 }));
 
 const App = () => {
@@ -59,7 +58,7 @@ const App = () => {
   useScrollToTop(appRef);
 
   useEffect(() => {
-    localStorage.removeItem(STORAGE_KEY);
+    // localStorage.removeItem(STORAGE_KEY);
     const payload = JSON.parse(localStorage.getItem(STORAGE_KEY));
     // skips intro if local storage exist in user's browser
     if (payload) {
@@ -87,7 +86,7 @@ const App = () => {
     <>
       <Box
         id={Utils.getElId("app", "heyitsjhu")}
-        className={classnames([classes.app, isHome && classes.isHome])}
+        className={classnames([classes.app, !isHome && classes.isNotHome])}
         ref={appRef}
       >
         <ParticleCanvas
